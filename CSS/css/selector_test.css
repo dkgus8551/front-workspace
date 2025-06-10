@@ -1,15 +1,13 @@
-div[id=container1][class=highlight]{
+#container1.highlight{
 background-color: yellow;
 }
 
 
-#container2>p{
-
-    color: red;
-}
-#container2 p:not(div>p){
-
+#container2 p:not{
     color: pink;
+}
+#container2>p{
+    color: red;
 }
 
 
@@ -19,11 +17,7 @@ border: 1px solid blue;
 
 
 
-#container4 h1{
-color: green;
-font-size: 20px;
-}
-#container4 [class=title]{
+#container4>h1, #container4 .title{
 color: green;
 font-size: 20px;
 }
@@ -56,17 +50,17 @@ div[class|=admin]{
 }
 
 
-div[class=container8]>p:first-child{
+.container8>p:only-of-type{
     color: blue;
 }
 
 
-#container9 [title*=important]:not([title*=not-important]){
+#container9>p[title*=important]:not(#container9>p[title*=not-important]){
     background-color: red;
 }
 
 
-ul[id=menu]>li[class=active]{
+#menu>li.active{
     color: red;
 }
 
