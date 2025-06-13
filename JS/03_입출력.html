@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입출력</title>
+</head>
+<body>
+    <h1>입출력</h1>
+    <input type="button" value="confirm" onclick="test1()">
+    <input type="button" value="prompt" onclick="test2()">
+
+    <script>
+        function test1(){
+            var bool = confirm("이 파일을 삭제하시겠습니까?");
+            // 확인=true, 취소=false
+            if(bool){
+                alert("파일을 삭제했습니다.");
+            }
+        }
+    </script>
+    <script>
+        function test2(){
+            var name = prompt("너의 이름은?");
+            // 확인=입력한 값이 name으로 전달, 취소=null
+            console.log(name);
+        }
+    </script>
+
+
+    <h2>innerHTML | innerText | outerHTML</h2>
+    <input type="button" value="innerHTML" onclick="test3();">
+    <input type="button" value="innerText" onclick="test4();">
+    <input type="button" value="outerHTML" onclick="test5();">
+    <div class="wrapper"></div>
+
+    <script>
+        var wrapper=document.querySelector(".wrapper");
+
+        function test3(){
+            /*
+                innerHTML : 각 HTML 태그의 content 영역을 의미함
+                 - getter : html이 포함된 content를 반환
+                 - setter : 주어진 문자열을 html로 변환하여 출력
+            */
+            var str = "<h1>ㅁㄴㅇㄹ</h1>";
+            wrapper.innerHTML=str;
+            console.log(wrapper.innerHTML);
+
+            // 확인=입력한 값이 name으로 전달, 취소=null
+        }
+
+        function test4(){
+            /*
+                innerText : content 영역 안의 문자열 요소
+                 - getter : html태그는 무시하고 텍스트만 가져옴
+                 - setter : html태그는 html 요소가 아닌 단순 문자로써 처리됨
+            */
+            var str = "<h1>ㄴㄴㄴㄴㄴㄴㄴ</h1>";
+            wrapper.innerText=str;
+            console.log(wrapper.innerText);
+
+            // 확인=입력한 값이 name으로 전달, 취소=null
+        }
+
+        function test5(){
+            /*
+                outerHTML : 선택된 요소의 내부 content+선택된 요소
+                 - getter : html태그는 무시하고 텍스트만 가져옴
+                 - setter : html태그는 html 요소가 아닌 단순 문자로써 처리됨
+            */
+           console.log(wrapper.outerHTML);
+           wrapper.outerHTML="<mark>asaaa</mark>"
+        }
+    </script>
+
+
+</body>
+</html>

@@ -21,6 +21,7 @@
            js로 웹페이지 상의 이벤트가 발생했을 때 실행할 동작을 정의함
          - 웹 브라우저에서 실행 가능한 인터프리터 방식의 스크립트 언어
          * 인터프리터: 컴파일 없이 한 줄씩 실행되는 언어
+         * Java는 .class 파일로 컴파일->JVM에서 한 줄씩 실행됨(하이브리드 언어)
         
         장점
          - 코드 작성 후 바로 실행 결과를 볼 수 있기 때문에 간단한 개발에 용이함
@@ -29,7 +30,7 @@
 
         단점
          - 컴파일 방식의 언어보다 실행 속도가 느림
-         - 큰 규모의 어플리케이션 개발에 있어 "타입 안전성"이 부족함
+         - 큰 규모의 어플리케이션 개발에 있어 "타입 안전성"이 부족함(변수 별 자료형이 일관되지 않음)
     </pre>
     <h2>1. 자바스크립트 사용방법</h2>
     <ol>
@@ -47,15 +48,68 @@
         </li>
         <li>
             external 방식 : 현재 문서 외부에서 별도의 js 파일을 생성한 후 가져다 실행하는 방식
-
         </li>
-
     </ol>
 
+    <button id="btn">콘솔창 출력</button>
     <script>
-        // 선언형 함수 (사용 위치-위아래- 무관)
-        function abc(){
-            alert('버튼클릭했나요?');
+        // 내부 방식만으로 요소에 이벤트 부여하기
+        // 어떤 요소에 어떤 이벤트가 발생할지를 정하고
+        // 그 이벤트가 실행될 때의 동작을 정의
+        document.querySelector("#btn").onclick=function(){
+            console.log('하이');
+        }
+    </script>
+
+    <h2>2. 자바스크립트의 자료형</h2>
+    <button onclick="dataType();">자료형</button>
+
+    <script>
+        function dataType(){
+            // 변수 선언 시 사용되는 키워드
+            // 1. var(es5)
+            // 2, 3. let, const(es6)
+            var i; // undefined
+            console.log(i, typeof(i));
+
+            // 값 대입이 이뤄질 때 변수의 타입이 결정됨
+            i=100;
+            i=1.23;
+            console.log(i, typeof(i));
+
+            i='js is fun';
+            console.log(i, typeof(i));
+
+            i=true;
+            console.log(i, typeof(i));
+            
+            // 자바스크립트에서는 functions도 자료형
+            // 함수를 값처럼 취급함 ---------------------------------
+            i=function(x,y){
+                return x+y;
+            };
+            console.log(i, typeof(i), i(1,2));
+
+            // 객체 자료형
+            // 배열도 하나의 객체(object)
+            i=[1,2,3,4];
+            // list와 비슷
+            console.log(i,typeof i);
+            
+            // map<String|Number, Object>
+            i={
+                name : '치킨',
+                taste : '할',
+                [price] : '19000',
+            }
+            console.log(i,typeof i);
+            
+            // null
+            i=null; //Object 자료형
+            console.log(i,typeof i);
+
+
+
         }
     </script>
 
@@ -68,22 +122,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <script>
+        // 선언형 함수 (사용 위치-위아래- 무관)
+        function abc(){
+            alert('버튼클릭했나요?');
+        }
+    </script>
 </body>
 </html>
