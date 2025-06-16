@@ -33,8 +33,12 @@
 	<script type="text/javascript">
 		function printValue() {
 			var wrapper=document.querySelector("#area");
-			var con =document.querySelectorAll("input[type=text]");
-			wrapper.innerHTML="구입자 : "+con[0].innerHTML+"<br>";
+			var con = document.querySelectorAll("input[type=text]");
+			console.log(con[0].value);
+
+			wrapper.innerHTML = "구입자 : "+ con[0].value + "<br>"+
+								"상품명 : "+con[1].value + "<br>"+
+								"가격 : "+con[2].value+"만원";
 		}
 	</script>
 </body>

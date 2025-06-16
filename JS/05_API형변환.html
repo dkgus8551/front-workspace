@@ -203,6 +203,178 @@
 
         }
     </script>
+    
+    <h1>Date</h1>
+    <input type="button" value="실행" onclick="test5();">
+
+    <script>
+        function test5(){
+            var now = new Date();
+            console.log(now);
+            
+            var time1 = new Date(2025, 5, 16); //월은 0월부터 시작
+            console.log(time1);
+
+            console.log(displayDateTime(now));
+        }
+
+        var displayDateTime = function(dt){
+            const year = dt.getFullYear();
+            const month = dt.getMonth()+1;
+            const date = dt.getDate();
+
+            return year+"-"+(month<10?"0"+month : month)+"-"+(date<10?"0"+date : date); // 2025-6-9
+        };
+    </script>
+
+    <!-- =================================여기까지 API====================== -->
+
+    <h2>형변환</h2>
+    <input type="button" value="실행" onclick="test6();">
+    <script>
+        const test6 = function(){
+            console.log(3+7+"7"); // 107
+            console.log(7-"7"); // 0
+            console.log(7*"7"); // 49
+            console.log(7/"7"); // 1
+            console.log(7%"4"); // 3 => 산술 연산자 앞뒤 항을 number로 자동형변환
+
+            console.log(7%"a"); // NaN: Not a Number
+            // 파싱 불가능한 문자를 숫자로 형변환 시 반환되는 값
+            console.log(typeof NaN); // NaN의 자료형은 number
+
+            console.log(7+true); // 8
+
+            console.log([] + 1); // 빈 문자열은 0 취급
+            /*
+                []+1 => [].toString+1 => ''+1
+                     => '1'
+            */
+            console.log([].toString); // 빈 배열, 0
+
+            console.log({} + 1);
+            // {}.toString() => 문자열 + 1 => 문자열1
+            
+            function fn(){}
+            console.log(fn + 1);
+            // function fn(){}.toString() => function fn(){} + 1 => function fn(){}1
+        };
+    </script>
+
+    <h2>Number | parseInt | parseFloat</h2>
+    <input type="button" value="실행" onclick="test7();"/>
+
+    <script>
+        const test7 = function(){
+            let num = "1234.567원";
+            console.log(Number(num)); // 자동 형변환 시 사용되는 메소드.
+            // 변환 불가능한 문자열인 경우 NaN 리턴
+            
+            // 변환 가능한 범위까지만 변환
+            console.log(parseInt(num));
+            console.log(parseFloat(num));
+        }
+    </script>
+
+    <h2>NaN | Infinity</h2>
+    <input type="button" value="실행" onclick="test8();"/>
+    <script>
+        const test8 = function(){
+            // 값을 0으로 나누는 경우
+            console.log(10/0); // Infinity(type: number)
+            
+            console.log((10/0) == Infinity); // true
+            console.log((10/"a") == NaN); // false
+            console.log(isNaN(10/"a")); // true
+            // 산술 연산 결과가 NaN인지 확인할 때 사용하는 함수
+        };
+    </script>
+
+    <h2>논리형 형변환</h2>
+    <input type="button" value="실행" onclick="test9();"/>
+
+    <script>
+        const test9 = function(){
+            /*
+                JS는 변수, 리터럴을 boolean형으로 형변환 가능
+
+                값이 존재하지 않는 것은 false로 치환
+                : -0, 0, 0.0, "", '', undefined, null, NaN
+
+                값이 존재하는 것은 true로 치환
+                : -123, 123, 1.23, "ㅁㄴㅇㄹ", new Date(), 빈 배열[], 빈 객체{}
+
+                if(값), 삼항연산자
+                Boolean(값)
+            */
+
+            console.log(Boolean(123));
+            console.log(Boolean(-123));
+            console.log(Boolean(1.23));
+            console.log(Boolean("asdf"));
+            console.log(Boolean(new Date()));
+            console.log(Boolean([])); // new Array()
+            console.log(Boolean({})); // new Object
+
+            console.log(Boolean(0));
+            console.log(Boolean(""));
+            console.log(Boolean(undefined));
+            console.log(Boolean(null));
+            console.log(Boolean(NaN));
+            
+            var obj = ""; // undefined
+            if(obj){
+                console.log(Boolean("obj에 값이 있다."));
+            } else {
+                console.log(Boolean("obj에 값이 없다."));
+            }
+
+            console.log("0" == 0); // true
+            console.log([] == 0); // true
+            console.log([] == "0"); // false
+        };
+    </script>
+
+    <h2>엄격비교연산자</h2>
+    <input type="button" value="실행" onclick="test10();"/>
+    <script>
+        /*
+            일반 동등 비교 연산자
+            ==, != 자료형이 다른 경우, "자동 형변환" 후 동등 비교 수행
+
+            엄격 동등 비교 연산자
+            ===, !== "값, 타입"을 모두 검사하는 연산자
+            값은 같으나 타입이 다른 경우 즉시 false 반환
+        */
+       const test10= function(){
+        console.log(3 == "3"); // true
+        console.log(3 === "3"); // false
+
+        console.log(null == undefined); // true
+       };
+    </script>
+
+    <h2>짧은 조건문</h2>
+    <input type="button" value="실행" onclick="test11();"/>
+
+    <script>
+        const test11=function(){
+            let num=10;
+
+            // if(num%2===0){
+            //     console.log("짝수");
+            // } else{
+            //     console.log("홀수");
+            // }
+
+            // 짧은 조건문
+            // 조건식A && 조건식B(실행할 코드 기술 가능)
+            num%2==0 && console.log("짝수");
+            num%2!=0 && console.log("홀수");
+
+            // 조건식A || 조건식B
+        };
+    </script>
 
 </body>
 
