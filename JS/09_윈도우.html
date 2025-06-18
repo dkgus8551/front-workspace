@@ -139,21 +139,138 @@
                 버튼클릭시 카운트다운하는 함수 만들기
                 10, 9 , 8, 7, 6, 5,... 1..
                 0 도달시 카운트다운 종료.
+
+                interval 종료 -> clearInterval
             */
-           const cd = document.querySelector("#countdown");
-           cd.style.display = "block";
-           let num = 10;
-            setInterval(function(){
-                if(num>0){
-                    cd.innerHTML = num--;
-                } else {
-                    cd.innerHTML = "뻥!"
+
+            const intervalId = setInterval(f, 1000);
+            let num = 10;
+
+            function f() {
+                const cd = document.querySelector("#countdown");
+                cd.innerHTML = num--;
+                cd.style.display = "block";
+
+                if (num <= 0) {
+                    clearInterval(intervalId);
+                    cd.innerHTML = "뻥!";
                 }
-            }, 1000);
-            
+            }
+
+            //    const cd = document.querySelector("#countdown");
+            //    cd.style.display = "block";
+            //    let num = 10;
+            //     setInterval(function(){
+            //         if(num>0){
+            //             cd.innerHTML = num--;
+            //         } else {
+            //             cd.innerHTML = "뻥!";
+            //         }
+            //     }, 1000);
+
         }
     </script>
 
+    <h2>BOM</h2>
+    <h3>Browser Object Model</h3>
+    <input type="button" value="navigator" onclick="test8();">
+    <input type="button" value="location" onclick="test9();">
+    <input type="button" value="history" onclick="test10();">
+    <input type="button" value="screen" onclick="test11();">
+
+    <script>
+        // console.log("페이지 로딩 시 실행");
+        function test8() {
+            /*
+                navigator: 현재 실행 중인 browser에 대한 정보를 가진 객체
+                 - 클라이언트의 브라우저 정보를 확인하여 적합한 콘텐츠를 제공
+            */
+            console.log(navigator);
+        }
+        function test9() {
+            /*
+                location(중요!!!!!!!!!!!!)
+                 - 브라우저의 주소창과 관련된 정보를 가진 객체
+                 - 브라우저의 URL에서 프로토콜, 호스트네임, 포트번호, 자원 경로 등을 얻어 올 수 있음
+                 - 브라우저의 URL을 조작하여 다른 값으로 변경 가능
+            */
+            console.log(location);
+            // location.reload(); // 새로고침 메소드
+
+            // location.href="https://naver.com";
+            location.assign("https://naver.com"); // 위와 동일한 코드(권장), 뒤로가기 가능
+            location.replace("https://naver.com"); // 뒤로가기 불가
+        }
+        function test10() {
+            /*
+                history
+                 - 방문 기록과 관련된 정보를 가진 객체
+                 back(): 뒤로 가기
+                 forward(): 앞으로 가기
+                 go(n): n번째 페이지로 이동하기
+            */
+            console.log(history);
+            history.back();
+
+        }
+        function test11() {
+            /*
+                screen
+                 - 모니터 관련 정보를 가진 객체
+            */
+            console.log(screen);
+        }
+    </script>
+
+    <h2>DOM</h2>
+    <input type="button" value="createElement" onclick="test12();">
+    <input type="button" value="createImg" onclick="test13();">
+    <input type="button" value="deleteNode" onclick="deleteNode(this);">
+    <input type="button" value="실습문제" onclick="test14();">
+    <div class="img-wrapper"></div>
+    <div class="result"></div>
+
+    <script>
+        /*
+            Node객체
+             - 모든 DOM 객체는 Node객체를 상속 받음
+             - html 내부에 작성하는 주석, 문자열, 태그 모두 node가 됨
+             - 모든 html 요소는 node의 메소드를 사용할 수 있고,
+               EventTarger의 이벤트 속성들을 이용할 수 있음
+             - dom 객체의 속성 및 메소드
+               1) firstChild, lastChild, childNodes...
+               2) contains(), appendChild(), removeChild()...
+        */
+
+        function test12() {
+            // <h3>안녕하세요</h3>
+
+            // 동적으로 html 요소 생성하기
+            // 1. innerHTML 사용
+            // document.querySelector(".result").innerHTML = "<h3>안녕하세요</h3>";
+
+            // 2. document 객체 생성 메소드 활용하기
+            // 1) elementNode 생성 메소드
+            const h3 = document.createElement("h3"); // <h3></h3>
+            console.log(h3);
+            
+            // 2) textNode 생성
+            const textNode = document.createTextNode("안녕하세요");
+            
+            // 3) 두 노드를 연결
+            //    계층 구조 설정
+            h3.appendChild(textNode);
+            console.log(h3);
+
+            document.querySelector(".result").appendChild(h3);
+        }
+    </script>
+    <script src="./js/09_window.js"></script>
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 
 </html>
