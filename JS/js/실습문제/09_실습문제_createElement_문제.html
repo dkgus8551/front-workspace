@@ -59,22 +59,48 @@
             2) 등록 완료후 작성한 내용을 비워줄것
         */
         function insertBoard(){
-           const li = document.createElement("li");
-           const h5 = document.createElement("h5");
-           const p = document.createElement("p");
+        //    const li = document.createElement("li");
+        //    const h5 = document.createElement("h5");
+        //    const p = document.createElement("p");
 
-           const titlestr = document.querySelector("input[name=title]").value;
-           const contentstr = document.querySelector("textarea[name=content]").value;
+        //    const titlestr = document.querySelector("input[name=title]").value;
+        //    const contentstr = document.querySelector("textarea[name=content]").value;
 
-           const titleNode = document.createTextNode(titlestr);
-           const contentNode = document.createTextNode(contentstr);
+        //    const titleNode = document.createTextNode(titlestr);
+        //    const contentNode = document.createTextNode(contentstr);
 
-           h5.appendChild(titleNode);
-           p.appendChild(contentNode);
-           document.querySelector("#boardList").appendChild(li);
-           document.querySelector("#boardList li:last-child").appendChild(h5);
-           document.querySelector("#boardList li:last-child").appendChild(p);
-        //    조건 추가해야 함
+        //    h5.appendChild(titleNode);
+        //    p.appendChild(contentNode);
+        //    document.querySelector("#boardList").appendChild(li);
+        //    document.querySelector("#boardList li:last-child").appendChild(h5);
+        //    document.querySelector("#boardList li:last-child").appendChild(p);
+        // //    조건 추가해야 함
+
+            const title = document.querySelector("input[name=title]");
+            const content = document.querySelector("textarea[name=content]");
+
+            // "" => false , "제목" => true
+            if (!(title.value && content.value)) {
+                console.log("제목이나 내용은 한글자 이상 작성해주세요");
+                return false;
+            }
+
+            // li > h5{w제목} p{내용}
+            const li = document.createElement("li");
+            const h5 = document.createElement("h5");
+            const p = document.createElement("p");
+            const titleTextNode = document.createTextNode(title.value);
+            const contentTextNode = document.createTextNode(content.value);
+
+            li.append(h5, p);
+            h5.appendChild(titleTextNode);
+            p.appendChild(contentTextNode);
+
+            const boardList = document.querySelector("#boardList");
+            boardList.appendChild(li);
+
+            title.value = "";
+            content.value = "";
         }
         
         /* 
@@ -82,7 +108,20 @@
             검색내용을 비워둔후 재검색 눌렀을때는 전체 게시글목록이 나와야함.
         */
         function searchTitle(){
-          
+            const searchValue = document.querySelector("input[name=search]").value;
+            const boardList = document.querySelectorAll("#boardList > li");
+
+            boardList.forEach(function(li){
+                console.log(li.firstChild,li.lastChild, li.childNodes, // 텍스트노드(공백)도 포함에서 가져온다.
+                li.children);
+                const title = li.querySelector("h5").innerText;
+                const content = li.children[1].innerText;
+                if(title.includes(searchValue)){
+                    li.style.display = "block";
+                }else{
+                    li.style.display = "none";
+                }
+            });
         }
     
     </script>
